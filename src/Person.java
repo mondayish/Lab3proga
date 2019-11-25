@@ -1,9 +1,21 @@
 public class Person extends Alive implements Rest, Philosophy {
+    private int attention;
     private String[] clothes;
+    private boolean dressed;
 
-    Person(String name, Planet place, String... clothes) {
-        super(name, place);
-        this.clothes = clothes;
+    Person(String name, Planet place, int energy, int attention, String... clothes) {
+        super(name, place, energy);
+        setAttention(attention);
+        setClothes(clothes);
+    }
+
+    int getAttention() {
+        return attention;
+    }
+
+    void setAttention(int attention) {
+        if (attention < 0 || attention > 5) this.attention = (int) (Math.random() * 5);
+        else this.attention = attention;
     }
 
     String[] getClothes() {
@@ -11,11 +23,28 @@ public class Person extends Alive implements Rest, Philosophy {
     }
 
     void setClothes(String... clothes) {
-        this.clothes = clothes;
+        this.clothes = deleteDublClothes(clothes);
+    }
+
+    private String[] deleteDublClothes(String clothes[]) {
+        //удаление дубликатов
+        boolean deleteIndex[] = new boolean[clothes.length];
+        for (int i = 0; i < clothes.length; i++) {
+            for (int j = i + 1; j < clothes.length; j++) {
+                if (clothes[i].equals(clothes[j])) deleteIndex[i] = true;
+            }
+        }
+        int size = 0;
+        for (boolean i : deleteIndex) if (!i) size++;
+        String normalClothes[] = new String[size];
+        int count = 0;
+        for (int i = 0; i < clothes.length; i++) if (!deleteIndex[i]) normalClothes[count++] = clothes[i];
+        return normalClothes;
     }
 
     Person(String name) {
-        super(name, Planet.EARTH);
+        super(name, Planet.EARTH, (int) (Math.random() * 10));
+        setAttention(-1);
     }
 
     @Override
@@ -25,14 +54,14 @@ public class Person extends Alive implements Rest, Philosophy {
 
     @Override
     public void rest() {
-        setCondition(Condition.REST);
         System.out.println(getName() + " отдыхает. Место: " + getPlace().getRussian());
+        setCondition(Condition.REST);
     }
 
     @Override
     public void sleep() {
-        setCondition(Condition.SLEEP);
         System.out.println(getName() + " спит. Место: " + getPlace().getRussian());
+        setCondition(Condition.SLEEP);
     }
 
     @Override
@@ -48,7 +77,7 @@ public class Person extends Alive implements Rest, Philosophy {
                 }
             }
         }
-        return getName().equals(person.getName()) && getPlace() == person.getPlace() && person.clothes.length == clothes.length && person.getCondition() == getCondition();
+        return getName().equals(person.getName()) && getPlace() == person.getPlace() && person.clothes.length == clothes.length && person.getCondition() == getCondition() && getEnergy() == person.getEnergy();
     }
 
     @Override
@@ -58,41 +87,58 @@ public class Person extends Alive implements Rest, Philosophy {
 
     @Override
     public String toString() {
-        return "Person " + getName() + " находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian();
+        String dress = "";
+        if (clothes != null) {
+            for (String i : clothes) {
+                dress += i + ", ";
+            }
+            dress = dress.substring(0, dress.length() - 2);
+        } else dress = "без одежды";
+        String dressedStr="не одет";
+        if(dressed) dressedStr="одет";
+        return "Person " + getName() + " находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian() + ", " + dressedStr + ". Одежда: " + dress + ". Энергия: " + getEnergy();
+    }
+
+    void sigh() {
+        if (getEnergy() < 3) System.out.println(getName() + " вздохнул");
+        else System.out.println(getName() + " ещё полон энергии");
     }
 
     @Override
-    public void sigh() {
-        System.out.println(getName() + " вздохнул");
-    }
-
-    @Override
-    public void notice(String thing) {
-        setCondition(Condition.NOTICE);
-        System.out.println(getName() + " заметил, что " + thing);
+    public void notice(GemStone gemStone) {
+        if (gemStone.getSpark() && attention * gemStone.getSize() / (Math.abs(this.getPlace().getNumber_to_sun() - gemStone.getPlace().getNumber_to_sun())) > 100) {
+            System.out.println(getName() + " заметил, что " + gemStone.getName() + " сверкает");
+            setCondition(Condition.NOTICE);
+        } else System.out.println(getName() + " ничего не замечает");
     }
 
     @Override
     public void think(Thing obj) {
-        setCondition(Condition.THINK);
         System.out.println(getName() + " думает о " + obj.getName());
+        setCondition(Condition.THINK);
     }
 
     void get_dressed() {
         if (clothes != null) {
-            String result = getName() + " надевает ";
-            for (String i : clothes) {
-                result += i + ", ";
+            if (!dressed) {
+                String result = getName() + " надевает ";
+                for (String i : clothes) {
+                    result += i + ", ";
+                }
+                result = result.substring(0, result.length() - 2);
+                System.out.println(result);
+                dressed = true;
+            } else {
+                System.out.println(getName() + " раздевается");
+                dressed = false;
             }
-            result = result.substring(0, result.length() - 2);
-            System.out.println(result);
         } else {
             this.tell("Мне нечего надеть");
         }
     }
 
     void stand() {
-        setCondition(Condition.STAND);
         System.out.println(getName() + " встал");
+        setCondition(Condition.STAND);
     }
 }

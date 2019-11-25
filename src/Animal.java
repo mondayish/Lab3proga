@@ -1,8 +1,8 @@
 public class Animal extends Alive implements Rest {
     private Color color;
 
-    Animal(String name, Planet place, Color color) {
-        super(name, place);
+    Animal(String name, Planet place, int energy, Color color) {
+        super(name, place, energy);
         this.color = color;
     }
 
@@ -16,14 +16,14 @@ public class Animal extends Alive implements Rest {
 
     @Override
     public void rest() {
-        setCondition(Condition.REST);
         System.out.println(getName() + " отдыхает. Место: " + getPlace().getRussian());
+        setCondition(Condition.REST);
     }
 
     @Override
     public void sleep() {
-        setCondition(Condition.SLEEP);
         System.out.println(getName() + " спит. Место: " + getPlace().getRussian());
+        setCondition(Condition.SLEEP);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Animal extends Alive implements Rest {
             return false;
         }
         Animal animal = (Animal) obj;
-        return getName().equals(animal.getName()) && getPlace() == animal.getPlace() && color == animal.color && animal.getCondition() == getCondition();
+        return getName().equals(animal.getName()) && getPlace() == animal.getPlace() && color == animal.color && animal.getCondition() == getCondition() && getEnergy() == animal.getEnergy();
     }
 
     @Override
@@ -47,6 +47,6 @@ public class Animal extends Alive implements Rest {
 
     @Override
     public String toString() {
-        return "Animal " + getName() + ", цвет: " + color.getRussian() + ", находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian();
+        return "Animal " + getName() + ", цвет: " + color.getRussian() + ", находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian() + ". Энергия: " + getEnergy();
     }
 }

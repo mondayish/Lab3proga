@@ -1,9 +1,14 @@
 public class GemStone extends Stone {
     private Gem type;
+    private boolean spark;
 
-    GemStone(String name, Planet place, int age, Gem type) {
-        super(name, place, age);
+    GemStone(String name, Planet place, int age, int size, Gem type) {
+        super(name, place, age, size);
         this.type = type;
+    }
+
+    boolean getSpark() {
+        return spark;
     }
 
     Gem getType() {
@@ -16,7 +21,10 @@ public class GemStone extends Stone {
 
     @Override
     public String toString() {
-        return type.getRussian() + " " + getName() + " стоит на " + getPlace().getRussian() + " уже " + getAge() + " лет";
+        if (!spark)
+            return type.getRussian() + " " + getName() + " стоит на " + getPlace().getRussian() + " уже " + getAge() + " лет. Размер: " + getSize();
+        else
+            return type.getRussian() + " " + getName() + " стоит на " + getPlace().getRussian() + " уже " + getAge() + " лет и сверкает. Размер: " + getSize();
     }
 
     @Override
@@ -34,7 +42,10 @@ public class GemStone extends Stone {
     }
 
     //сверкать
-    String sparkle() {
-        return getName() + " сверкает. Место: " + getPlace().getRussian();
+    void sparkle() {
+        if (!spark) {
+            spark = true;
+            System.out.println(getName() + " сверкает. Место: " + getPlace().getRussian());
+        } else spark = false;
     }
 }
