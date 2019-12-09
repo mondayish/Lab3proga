@@ -1,9 +1,6 @@
 interface Philosophy {
-    //вздохнуть
-    void sigh();
-
     //заметить
-    void notice(String thing);
+    void notice(GemStone gemStone);
 
     //думать
     void think(Thing obj);
