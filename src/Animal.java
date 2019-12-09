@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Animal extends Alive implements Rest {
+public class Animal extends Alive{
     private Color color;
     private int power;
     static final int MAX_POWER = 3;
