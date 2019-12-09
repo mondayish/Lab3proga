@@ -1,8 +1,9 @@
-public class Person extends Alive implements Rest, Philosophy {
+import java.util.Objects;
+
+public class Person extends Alive implements Philosophy {
     private int attention;
     private String[] clothes;
     private boolean dressed;
-<<<<<<< HEAD
     final static int MAX_ATTENTION = 5;
     final static int MIN_ATTENTION = 0;
 
@@ -47,13 +48,13 @@ public class Person extends Alive implements Rest, Philosophy {
         void go() {
             if (animal_with_power != null) {
                 //здесь проверяем опасность путешествия и отменяем его в случае высокого коэффициента опасности
-                double coefficient1=from.getLevelOfDanger();
-                double coefficient2=to.getLevelOfDanger();
-                if(coefficient1>=2) {
+                double coefficient1 = from.getLevelOfDanger();
+                double coefficient2 = to.getLevelOfDanger();
+                if (coefficient1 >= 2) {
                     System.out.println(analysisOfDanger(coefficient1, from));
                     return;
                 }
-                if(coefficient2>=2) {
+                if (coefficient2 >= 2) {
                     System.out.println(analysisOfDanger(coefficient2, to));
                     return;
                 }
@@ -81,10 +82,13 @@ public class Person extends Alive implements Rest, Philosophy {
         }
 
         //метод для анализа коэффициента опасности
-        String analysisOfDanger(double dangerCoefficient, Planet planet){
-            if(dangerCoefficient>=2) return "Лететь категорически нельзя, это опасно: Вокруг "+planet.getRussian()+" слишком много космических тел!!!";
-            else if(dangerCoefficient>=1) return "Лететь можно, но это не совсем безопасно: Вокруг "+planet.getRussian()+" достаточно космических тел.";
-            else return "Лететь можно, пассажиры в полной безопасности: Вокруг "+planet.getRussian()+" мало космических тел.";
+        String analysisOfDanger(double dangerCoefficient, Planet planet) {
+            if (dangerCoefficient >= 2)
+                return "Лететь категорически нельзя, это опасно: Вокруг " + planet.getRussian() + " слишком много космических тел!!!";
+            else if (dangerCoefficient >= 1)
+                return "Лететь можно, но это не совсем безопасно: Вокруг " + planet.getRussian() + " достаточно космических тел.";
+            else
+                return "Лететь можно, пассажиры в полной безопасности: Вокруг " + planet.getRussian() + " мало космических тел.";
         }
 
         //всевозможные проверки на силу и состояние
@@ -210,14 +214,11 @@ public class Person extends Alive implements Rest, Philosophy {
         }
 
         @Override
-        public String toString(){
-            return "Bag "+type.getRussian()+", владелец "+getName()+", цвет "+color+", содержимое: "+transfer(content, "ничего");
+        public String toString() {
+            return "Bag " + type.getRussian() + ", владелец " + getName() + ", цвет " + color + ", содержимое: " + transfer(content, "ничего");
         }
     }
 
-=======
-
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     Person(String name, Planet place, int energy, int attention, String... clothes) {
         super(name, place, energy);
         setAttention(attention);
@@ -229,12 +230,8 @@ public class Person extends Alive implements Rest, Philosophy {
     }
 
     void setAttention(int attention) {
-<<<<<<< HEAD
         if (attention < MIN_ATTENTION || attention > MAX_ATTENTION)
             this.attention = (int) (Math.random() * MAX_ATTENTION);
-=======
-        if (attention < 0 || attention > 5) this.attention = (int) (Math.random() * 5);
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
         else this.attention = attention;
     }
 
@@ -242,7 +239,6 @@ public class Person extends Alive implements Rest, Philosophy {
         return clothes;
     }
 
-<<<<<<< HEAD
     //в этом методе используем приведение типов
     void setClothes(String... Clothes) {
         Object[] objects = deleteDoubleThings(Clothes);
@@ -299,95 +295,27 @@ public class Person extends Alive implements Rest, Philosophy {
     Person(String name) {
         super(name, Planet.EARTH, (int) (Math.random() * MAX_ENERGY));
         setAttention(MIN_ATTENTION);
-=======
-    void setClothes(String... clothes) {
-        this.clothes = deleteDublClothes(clothes);
-    }
-
-    private String[] deleteDublClothes(String clothes[]) {
-        //удаление дубликатов
-        boolean deleteIndex[] = new boolean[clothes.length];
-        for (int i = 0; i < clothes.length; i++) {
-            for (int j = i + 1; j < clothes.length; j++) {
-                if (clothes[i].equals(clothes[j])) deleteIndex[i] = true;
-            }
-        }
-        int size = 0;
-        for (boolean i : deleteIndex) if (!i) size++;
-        String normalClothes[] = new String[size];
-        int count = 0;
-        for (int i = 0; i < clothes.length; i++) if (!deleteIndex[i]) normalClothes[count++] = clothes[i];
-        return normalClothes;
-    }
-
-    Person(String name) {
-        super(name, Planet.EARTH, (int) (Math.random() * 10));
-        setAttention(-1);
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 
     @Override
-    void tell(String phrase) {
-        System.out.println(getName() + " говорит: \"" + phrase + "\"");
-    }
-
-    @Override
-    public void rest() {
-        System.out.println(getName() + " отдыхает. Место: " + getPlace().getRussian());
-        setCondition(Condition.REST);
-    }
-
-    @Override
-    public void sleep() {
-        System.out.println(getName() + " спит. Место: " + getPlace().getRussian());
-        setCondition(Condition.SLEEP);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || this.hashCode() != obj.hashCode() || this.getClass() != obj.getClass()) {
-            return false;
-        }
-        Person person = (Person) obj;
-        if (person.clothes.length == clothes.length) {
-            for (int i = 0; i < clothes.length; i++) {
-                if (!clothes[i].equals(person.clothes[i])) {
-                    return false;
-                }
-            }
-        }
-<<<<<<< HEAD
-        return getName().equals(person.getName()) && getPlace() == person.getPlace() && person.clothes.length == clothes.length &&
-                person.getCondition() == getCondition() && getEnergy() == person.getEnergy();
-=======
-        return getName().equals(person.getName()) && getPlace() == person.getPlace() && person.clothes.length == clothes.length && person.getCondition() == getCondition() && getEnergy() == person.getEnergy();
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return attention == person.attention && getName() == person.getName();
     }
 
     @Override
     public int hashCode() {
-        return getName().hashCode() + getPlace().hashCode() + getCondition().hashCode();
+        return Objects.hash(attention, getName());
     }
 
     @Override
     public String toString() {
-<<<<<<< HEAD
         String dress = transfer(clothes, "нет одежды");
         String dressedStr = dressed ? "одет" : "не одет";
         return "Person " + getName() + " находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian()
                 + ", " + dressedStr + ". Одежда: " + dress + ". Энергия: " + getEnergy();
-=======
-        String dress = "";
-        if (clothes != null) {
-            for (String i : clothes) {
-                dress += i + ", ";
-            }
-            dress = dress.substring(0, dress.length() - 2);
-        } else dress = "без одежды";
-        String dressedStr="не одет";
-        if(dressed) dressedStr="одет";
-        return "Person " + getName() + " находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian() + ", " + dressedStr + ". Одежда: " + dress + ". Энергия: " + getEnergy();
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 
     void sigh() {
@@ -398,13 +326,9 @@ public class Person extends Alive implements Rest, Philosophy {
     //персонаж заметит камень, только когда тот сверкает, у персонажа достаточно внимания, у камня достаточный размер, расстояние между их планетами достаточно мало
     @Override
     public void notice(GemStone gemStone) {
-<<<<<<< HEAD
         final int VALUE_FOR_NOTICE = 100;
         if (gemStone.getSpark() && attention * gemStone.getSize() /
                 (Math.abs(this.getPlace().getNumber_to_sun() - gemStone.getPlace().getNumber_to_sun())) > VALUE_FOR_NOTICE) {
-=======
-        if (gemStone.getSpark() && attention * gemStone.getSize() / (Math.abs(this.getPlace().getNumber_to_sun() - gemStone.getPlace().getNumber_to_sun())) > 100) {
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
             System.out.println(getName() + " заметил, что " + gemStone.getName() + " сверкает");
             setCondition(Condition.NOTICE);
         } else System.out.println(getName() + " ничего не замечает");
@@ -418,7 +342,7 @@ public class Person extends Alive implements Rest, Philosophy {
 
     //метод для перечисления элементов массива в строке, если массив пуст возвращает параметр if_null
     String transfer(Object[] array, String if_null) {
-        if (array!=null && array.length>0) {
+        if (array != null && array.length > 0) {
             String result = "";
             for (Object i : array) {
                 result = result + i.toString() + ", ";
@@ -433,15 +357,7 @@ public class Person extends Alive implements Rest, Philosophy {
         if (clothes != null) {
             if (!dressed) {
                 String result = getName() + " надевает ";
-<<<<<<< HEAD
                 System.out.println(result + transfer(clothes, ""));
-=======
-                for (String i : clothes) {
-                    result += i + ", ";
-                }
-                result = result.substring(0, result.length() - 2);
-                System.out.println(result);
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
                 dressed = true;
             } else {
                 System.out.println(getName() + " раздевается");
@@ -451,12 +367,4 @@ public class Person extends Alive implements Rest, Philosophy {
             this.tell("Мне нечего надеть");
         }
     }
-<<<<<<< HEAD
-=======
-
-    void stand() {
-        System.out.println(getName() + " встал");
-        setCondition(Condition.STAND);
-    }
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
 }

@@ -1,5 +1,4 @@
 public enum Planet {
-<<<<<<< HEAD
     EARTH("Земля", 3, 10000),
     MOON("Луна", 3.5, 500),
     MARS("Марс", 4, 5000);
@@ -34,20 +33,8 @@ public enum Planet {
 
     double getNumber_to_sun() {
         return number_to_sun;
-=======
-    EARTH("Земля", 3), MOON("Луна", 3.5), MARS("Марс", 4);
-    private String russian;
-    private double number_to_sun;
-
-    Planet(String russian, double number_to_sun) {
-        this.russian = russian;
-        this.number_to_sun=number_to_sun;
->>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 
-    double getNumber_to_sun(){
-        return number_to_sun;
-    }
     String getRussian() {
         return russian;
     }
