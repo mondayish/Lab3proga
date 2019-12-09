@@ -4,7 +4,11 @@ public class Animal extends Alive implements Rest {
     static final int MAX_POWER=3;
     static final int MIN_POWER=0;
 
+<<<<<<< HEAD
     Animal(String name, Planet place, int energy, Color color, int power) {
+=======
+    Animal(String name, Planet place, int energy, Color color) {
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
         super(name, place, energy);
         this.color = color;
         setPower(power);
@@ -51,8 +55,12 @@ public class Animal extends Alive implements Rest {
             return false;
         }
         Animal animal = (Animal) obj;
+<<<<<<< HEAD
         return getName().equals(animal.getName()) && getPlace() == animal.getPlace() &&
                 color == animal.color && animal.getCondition() == getCondition() && getEnergy() == animal.getEnergy();
+=======
+        return getName().equals(animal.getName()) && getPlace() == animal.getPlace() && color == animal.color && animal.getCondition() == getCondition() && getEnergy() == animal.getEnergy();
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 
     @Override
@@ -62,7 +70,11 @@ public class Animal extends Alive implements Rest {
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "Animal " + getName() + ", цвет: " + color.getRussian() + ", находиться на " + getPlace().getRussian() +
                 ". Состояние: " + getCondition().getRussian() + ". Энергия: " + getEnergy();
+=======
+        return "Animal " + getName() + ", цвет: " + color.getRussian() + ", находиться на " + getPlace().getRussian() + ". Состояние: " + getCondition().getRussian() + ". Энергия: " + getEnergy();
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 }

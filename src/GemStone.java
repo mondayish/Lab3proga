@@ -1,16 +1,23 @@
 public class GemStone extends Stone {
     private Gem type;
+<<<<<<< HEAD
     private boolean spark;   //сверкает ли?
+=======
+    private boolean spark;
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
 
     GemStone(String name, Planet place, int age, int size, Gem type) {
         super(name, place, age, size);
         this.type = type;
     }
 
+<<<<<<< HEAD
     GemStone(String name, Gem type){
         this(name, Planet.EARTH, (int)(Math.random()*10000), 1, type);
     }
 
+=======
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     boolean getSpark() {
         return spark;
     }

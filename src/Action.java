@@ -1,5 +1,6 @@
 public class Action {
     public static void main(String[] args) {
+<<<<<<< HEAD
         Person sniff = new Person("Снифф", Planet.MARS, 1, 2);
         GemStone king = new GemStone("Король рубинов", Planet.EARTH, 200, 50, Gem.RUBY);
         Person wizard = new Person("Волшебник", Planet.MOON, 7, 4, "перчатки", "перчатки", "плащ", "шарф", "тёмные очки");
@@ -11,6 +12,13 @@ public class Action {
         Person.Bag case1 = tofsla.new Bag(BagType.CASE, Color.PURPLE, king);
         Person.Bag backpack1 = wizard.new Bag(BagType.BACKPACK, Color.PINK, gemStone1, gemStone2);
         TimeOfDay.NIGHT.describe("Крайне тёмная земная");
+=======
+        Person sniff = new Person("Снифф");
+        GemStone king = new GemStone("Король рубинов", Planet.EARTH, 200,50, Gem.RUBY);
+        Person wizard = new Person("Волшебник", Planet.MOON, 7, 4, "перчатки", "перчатки", "плащ", "шарф", "тёмные очки");
+        Animal pant = new Animal("Пантера", Planet.MOON, 1, Color.PINK);
+        Time_of_day.NIGHT.describe("Крайне тёмная земная");
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
         System.out.println();
         System.out.println("Описание объектов, учавствующих в действии:");
         System.out.println(sniff);
@@ -37,6 +45,7 @@ public class Action {
         wizard.tell("Король рубинов! Я искал его не одну сотню лет!");
         wizard.stand();
         wizard.get_dressed();
+<<<<<<< HEAD
         backpack1.deleteContent(gemStone1, gemStone2);
         Person.Arrive arrive1 = new Person.Arrive(pant, Planet.MOON, Planet.EARTH, wizard);
         SpaceBody cometa = new SpaceBody() {
@@ -77,5 +86,10 @@ public class Action {
         arrive1.go();
         many_meteorits.finishFly();
         arrive1.go();
+=======
+        sniff.get_dressed();
+        wizard.get_dressed();
+        wizard.goTo(Planet.EARTH);
+>>>>>>> e5162eea88d66c50141dadce2aaf89ccb07e6145
     }
 }
