@@ -34,6 +34,7 @@ Laboratory work 3, ITMO, Programming.
 6. В программу необходимо добавить использование локальных, анонимных и вложенных классов (static и non-static).
 
 **Class diagram**
+
 ![](lab3_diagram.png)
 
 **Acquired skills:**
